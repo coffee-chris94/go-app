@@ -1,0 +1,31 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.16
+
+    - name: Install golangci-lint
+      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+    - name: Install semgrep
+      run: pip install semgrep
+
+    - name: Run linters
+      run: golangci-lint run ./...
+
+    - name: Run SAST (semgrep)
+      run: semgrep --config auto .
+
+    - name: Build binary
+      run: go build -o main .
+
