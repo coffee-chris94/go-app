@@ -1,0 +1,7 @@
+file.exists('main.go') {
+  exists == true
+}
+
+netstat.listening_ports {
+  port == 8080
+}
