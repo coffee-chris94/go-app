@@ -26,3 +26,11 @@ jobs:
         name: main
         path: ./main
 
+    - name: Trigger Deployment Repository
+      run: |
+        curl -X POST \
+          -H "Authorization: token ${{ secrets.REPO_DEPLOY_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/cafeespresso/go-web-app-deploy/dispatches \
+          -d '{"event_type": "build_container"}'
+
