@@ -29,6 +29,16 @@ jobs:
     - name: Build binary
       run: go build -o main .
 
+    - name: Install cnspec
+      run: |
+        curl -fsSL https://download.mondoo.com/cnspec/install.sh | bash
+        echo "cnspec installed successfully"
+
+    - name: Run cnspec tests
+      run: |
+        cnspec scan local
+        echo "cnspec scan completed"
+
     - name: Upload binary as release asset
       uses: actions/upload-artifact@v3  # Updated to v3
       with:
