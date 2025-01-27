@@ -39,7 +39,7 @@ jobs:
       uses: peter-evans/repository-dispatch@v3
       with:
         token: ${{ secrets.REPO_DEPLOY_TOKEN }}
-        repository: MCMXCIII/go-app-container
+        repository: coffee-chris94/go-app-container
         event-type: build_container
         client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
 
